@@ -2,10 +2,7 @@ package misrraimsp.fourthrest.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -18,6 +15,7 @@ public class Expense {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "fk_person")
     private Person payer;
 
     private BigDecimal amount;
