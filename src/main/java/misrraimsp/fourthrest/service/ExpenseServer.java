@@ -2,8 +2,9 @@ package misrraimsp.fourthrest.service;
 
 import lombok.RequiredArgsConstructor;
 import misrraimsp.fourthrest.data.ExpenseRepository;
-import misrraimsp.fourthrest.util.converter.ExpenseConverter;
-import misrraimsp.fourthrest.util.dto.ExpenseDTO;
+import misrraimsp.fourthrest.model.Expense;
+import misrraimsp.fourthrest.model.dto.ExpenseConverter;
+import misrraimsp.fourthrest.model.dto.ExpenseDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +20,16 @@ public class ExpenseServer {
         return expenseRepository
                 .findAll()
                 .stream()
-                .map(ExpenseConverter::convertExpenseToDTO)
+                .map(ExpenseConverter::convertExpenseToDto)
                 .collect(Collectors.toList());
     }
 
     public double getTotalExpense() {
         return expenseRepository.getTotalExpense();
+    }
+
+    public ExpenseDTO persist(ExpenseDTO dto) {
+        Expense saved = expenseRepository.save(ExpenseConverter.convertDtoToExpense(dto));
+        return ExpenseConverter.convertExpenseToDto(saved);
     }
 }

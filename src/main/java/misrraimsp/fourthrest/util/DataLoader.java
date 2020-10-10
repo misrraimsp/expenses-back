@@ -1,4 +1,4 @@
-package misrraimsp.fourthrest.util.config;
+package misrraimsp.fourthrest.util;
 
 import misrraimsp.fourthrest.data.ExpenseRepository;
 import misrraimsp.fourthrest.data.PersonRepository;

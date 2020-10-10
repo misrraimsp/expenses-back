@@ -1,7 +1,6 @@
-package misrraimsp.fourthrest.util.converter;
+package misrraimsp.fourthrest.model.dto;
 
 import misrraimsp.fourthrest.model.Person;
-import misrraimsp.fourthrest.util.dto.PersonDTO;
 
 import java.math.BigDecimal;
 
@@ -9,6 +8,7 @@ public class PersonConverter {
 
     public static PersonDTO convertPersonToDTO(Person person, BigDecimal duty) {
         PersonDTO dto = new PersonDTO();
+        dto.setId(person.getId());
         dto.setFirstName(person.getFirstName());
         dto.setLastName(person.getLastName());
         dto.setBalance(person.getBalance(duty).doubleValue());

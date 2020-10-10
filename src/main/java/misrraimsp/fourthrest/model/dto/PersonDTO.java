@@ -1,9 +1,11 @@
-package misrraimsp.fourthrest.util.dto;
+package misrraimsp.fourthrest.model.dto;
 
 import lombok.Data;
 
 @Data
 public class PersonDTO {
+
+    private Long id;
 
     private String firstName;
 

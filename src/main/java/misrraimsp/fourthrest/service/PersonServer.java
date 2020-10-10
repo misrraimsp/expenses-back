@@ -2,8 +2,8 @@ package misrraimsp.fourthrest.service;
 
 import lombok.RequiredArgsConstructor;
 import misrraimsp.fourthrest.data.PersonRepository;
-import misrraimsp.fourthrest.util.converter.PersonConverter;
-import misrraimsp.fourthrest.util.dto.PersonDTO;
+import misrraimsp.fourthrest.model.dto.PersonConverter;
+import misrraimsp.fourthrest.model.dto.PersonDTO;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
