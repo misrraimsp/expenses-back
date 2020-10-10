@@ -1,7 +1,7 @@
 package misrraimsp.fourthrest.controller;
 
 import lombok.RequiredArgsConstructor;
-import misrraimsp.fourthrest.service.ExpenseServer.ExpenseServer;
+import misrraimsp.fourthrest.service.ExpenseServer;
 import misrraimsp.fourthrest.util.dto.ExpenseDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -23,12 +23,20 @@ public class Person {
 
     private String lastName;
 
-    @Transient
-    private BigDecimal balance;
-
     public void addExpense(Expense expense) {
         this.expenses.add(expense);
         expense.setPayer(this);
+    }
+
+    public BigDecimal getBalance(BigDecimal duty) {
+        return this.getTotalExpense().subtract(duty);
+    }
+
+    private BigDecimal getTotalExpense() {
+        return this.expenses
+                .stream()
+                .map(Expense::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }

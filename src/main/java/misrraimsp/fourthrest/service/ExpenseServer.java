@@ -1,4 +1,4 @@
-package misrraimsp.fourthrest.service.ExpenseServer;
+package misrraimsp.fourthrest.service;
 
 import lombok.RequiredArgsConstructor;
 import misrraimsp.fourthrest.data.ExpenseRepository;
@@ -21,5 +21,9 @@ public class ExpenseServer {
                 .stream()
                 .map(ExpenseConverter::convertExpenseToDTO)
                 .collect(Collectors.toList());
+    }
+
+    public double getTotalExpense() {
+        return expenseRepository.getTotalExpense();
     }
 }
