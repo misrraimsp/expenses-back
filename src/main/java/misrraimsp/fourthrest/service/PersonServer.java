@@ -2,6 +2,7 @@ package misrraimsp.fourthrest.service;
 
 import lombok.RequiredArgsConstructor;
 import misrraimsp.fourthrest.data.PersonRepository;
+import misrraimsp.fourthrest.model.Person;
 import misrraimsp.fourthrest.model.dto.PersonConverter;
 import misrraimsp.fourthrest.model.dto.PersonDTO;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,14 @@ public class PersonServer {
         return personRepository
                 .findAll()
                 .stream()
-                .map(person -> PersonConverter.convertPersonToDTO(person,duty))
+                .map(person -> PersonConverter.convertPersonToDto(person,duty))
                 .collect(Collectors.toList());
+    }
+
+    public PersonDTO persist(PersonDTO dto) {
+        Person saved = personRepository.save(PersonConverter.convertDtoToPerson(dto));
+        BigDecimal duty = this.getDuty();
+        return PersonConverter.convertPersonToDto(saved,duty);
     }
 
     private BigDecimal getDuty() {
