@@ -1,7 +1,7 @@
 package misrraimsp.fourthrest.controller;
 
 import lombok.RequiredArgsConstructor;
-import misrraimsp.fourthrest.model.dto.ExpenseDTO;
+import misrraimsp.fourthrest.model.dto.TransferDTO;
 import misrraimsp.fourthrest.service.PersonServer;
 import misrraimsp.fourthrest.model.dto.PersonDTO;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +25,10 @@ public class PersonController {
     @PostMapping("/people")
     public PersonDTO newPerson(@RequestBody PersonDTO dto) {
         return personServer.persist(dto);
+    }
+
+    @GetMapping("/transfers")
+    public List<TransferDTO> allTransfers() {
+        return personServer.getTransfers();
     }
 }

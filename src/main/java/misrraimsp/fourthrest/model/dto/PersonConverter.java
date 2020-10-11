@@ -12,7 +12,7 @@ public class PersonConverter {
         dto.setId(person.getId());
         dto.setFirstName(person.getFirstName());
         dto.setLastName(person.getLastName());
-        dto.setBalance(person.getBalance(duty).doubleValue());
+        dto.setBalance(person.getBalance(duty));
         return dto;
     }
 

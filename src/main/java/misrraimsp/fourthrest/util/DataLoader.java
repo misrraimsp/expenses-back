@@ -39,26 +39,27 @@ public class DataLoader {
             personRepository.save(paco);
 
             Expense e1 = new Expense();
-            e1.setAmount(BigDecimal.valueOf(17.75));
+            e1.setAmount(BigDecimal.valueOf(10));
             e1.setDate(LocalDateTime.of(2020, Month.APRIL,12,21,28, 54));
             e1.setDescription("Cena en McRoom");
             peter.addExpense(e1);
             expenseRepository.save(e1);
 
             Expense e2 = new Expense();
-            e2.setAmount(BigDecimal.valueOf(9.15));
+            e2.setAmount(BigDecimal.valueOf(10));
             e2.setDate(LocalDateTime.of(2020, Month.APRIL,13,8,3, 14));
             e2.setDescription("Desayuno en RealFood");
-            peter.addExpense(e2);
+            paco.addExpense(e2);
             expenseRepository.save(e2);
 
             Expense e3 = new Expense();
-            e3.setAmount(BigDecimal.valueOf(10.5));
+            e3.setAmount(BigDecimal.valueOf(10));
             e3.setDate(LocalDateTime.of(2020, Month.APRIL,13,13,17, 0));
             e3.setDescription("Taxi");
-            paco.addExpense(e3);
+            marco.addExpense(e3);
             expenseRepository.save(e3);
 
+            /*
             Expense e4 = new Expense();
             e4.setAmount(BigDecimal.valueOf(39.35));
             e4.setDate(LocalDateTime.of(2020, Month.APRIL,13,15,46, 21));
@@ -66,14 +67,19 @@ public class DataLoader {
             peter.addExpense(e4);
             expenseRepository.save(e4);
 
+             */
+
             personRepository.findAll().forEach(person -> log.info("Loaded " + person.getFirstName()));
             expenseRepository.findAll().forEach(expense -> log.info("Loaded " + expense.getDescription()));
 
+            /*
             Person pit = personRepository.findById(1L).get();
             pit.getExpenses().forEach(expense -> log.info("Pit ex: {}, {}, {}", expense.getId(), expense.getDescription(), expense.getAmount()));
 
             Expense someEx = expenseRepository.findById(4L).get();
             log.info("Expense 4 was: {}", someEx.getDescription());
+
+             */
         };
 
     }

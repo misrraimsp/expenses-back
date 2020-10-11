@@ -23,13 +23,13 @@ public class Person {
 
     private String lastName;
 
+    public BigDecimal getBalance(BigDecimal duty) {
+        return this.getTotalExpense().subtract(duty);
+    }
+
     public void addExpense(Expense expense) {
         this.expenses.add(expense);
         expense.setPayer(this);
-    }
-
-    public BigDecimal getBalance(BigDecimal duty) {
-        return this.getTotalExpense().subtract(duty);
     }
 
     private BigDecimal getTotalExpense() {
