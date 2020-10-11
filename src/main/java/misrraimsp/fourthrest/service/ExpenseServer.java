@@ -9,6 +9,7 @@ import misrraimsp.fourthrest.model.dto.ExpenseConverter;
 import misrraimsp.fourthrest.model.dto.ExpenseDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,7 @@ public class ExpenseServer {
         return expenseRepository
                 .findAll()
                 .stream()
+                .sorted(Comparator.comparing(Expense::getDate).reversed())
                 .map(ExpenseConverter::convertExpenseToDto)
                 .collect(Collectors.toList());
     }

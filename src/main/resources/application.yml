@@ -4,7 +4,7 @@ spring:
       dev-mariadb
       #dev-h2
   jpa:
-    show-sql: true
+    show-sql: false
 ---
 
 spring:
