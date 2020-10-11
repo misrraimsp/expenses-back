@@ -30,6 +30,6 @@ public class ExpenseServer {
 
     public ExpenseDTO persist(ExpenseDTO dto) {
         Expense saved = expenseRepository.save(ExpenseConverter.convertDtoToExpense(dto));
-        return ExpenseConverter.convertExpenseToDto(saved);
+        return ExpenseConverter.convertExpenseToDto(expenseRepository.findById(saved.getId()).orElse(saved));
     }
 }

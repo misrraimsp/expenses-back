@@ -3,6 +3,7 @@ package misrraimsp.fourthrest.model.dto;
 import misrraimsp.fourthrest.model.Expense;
 import misrraimsp.fourthrest.model.Person;
 
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 
 public class ExpenseConverter {
@@ -25,7 +26,7 @@ public class ExpenseConverter {
         payer.setId(dto.getPayerId());
         expense.setPayer(payer);
         expense.setDescription(dto.getDescription());
-        expense.setAmount(dto.getAmount());
+        expense.setAmount(dto.getAmount().setScale(2, RoundingMode.HALF_UP));
         expense.setDate(LocalDateTime.now());
         return expense;
     }

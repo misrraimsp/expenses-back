@@ -33,8 +33,7 @@ public class PersonServer {
 
     public PersonDTO persist(PersonDTO dto) {
         Person saved = personRepository.save(PersonConverter.convertDtoToPerson(dto));
-        BigDecimal duty = this.getDuty();
-        return PersonConverter.convertPersonToDto(saved,duty);
+        return PersonConverter.convertPersonToDto(saved, this.getDuty());
     }
 
     public List<TransferDTO> getTransfers() {
@@ -44,13 +43,16 @@ public class PersonServer {
             if (personDTO.getBalance().compareTo(BigDecimal.ZERO) < 0) debtors.push(personDTO);
             if (personDTO.getBalance().compareTo(BigDecimal.ZERO) > 0) creditors.push(personDTO);
         });
+
         List<TransferDTO> transfers = new ArrayList<>();
         while (!debtors.empty() && !creditors.empty()) {
             PersonDTO debtor = debtors.peek();
             PersonDTO creditor = creditors.peek();
+
             TransferDTO transferDTO = new TransferDTO();
             transferDTO.setIssuer(debtor);
             transferDTO.setRecipient(creditor);
+
             BigDecimal result = debtor.getBalance().add(creditor.getBalance());
             if (result.compareTo(BigDecimal.ZERO) < 0) {
                 transferDTO.setAmount(creditor.getBalance());
@@ -65,14 +67,16 @@ public class PersonServer {
                 debtors.pop();
                 creditors.pop();
             }
+
             transfers.add(transferDTO);
         }
+
         return transfers;
     }
 
     private BigDecimal getDuty() {
-        BigDecimal total = BigDecimal.valueOf(expenseServer.getTotalExpense());
+        BigDecimal total = BigDecimal.valueOf(expenseServer.getTotalExpense()).setScale(2, RoundingMode.HALF_UP);
         BigDecimal count = BigDecimal.valueOf(personRepository.count());
-        return total.divide(count, RoundingMode.HALF_UP);
+        return total.divide(count, 2, RoundingMode.HALF_UP);
     }
 }
