@@ -9,14 +9,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.Month;
 
+@Profile("dev-h2")
 @Configuration
-public class DataLoader {
-    private static final Logger log = LoggerFactory.getLogger(DataLoader.class);
+public class DataLoader_H2 {
+    private static final Logger log = LoggerFactory.getLogger(DataLoader_H2.class);
 
     @Bean
     CommandLineRunner initDatabase(PersonRepository personRepository, ExpenseRepository expenseRepository) {
@@ -39,21 +42,21 @@ public class DataLoader {
             personRepository.save(paco);
 
             Expense e1 = new Expense();
-            e1.setAmount(BigDecimal.valueOf(10));
+            e1.setAmount(BigDecimal.valueOf(10).setScale(3, RoundingMode.HALF_UP));
             e1.setDate(LocalDateTime.of(2020, Month.APRIL,12,21,28, 54));
             e1.setDescription("Cena en McRoom");
             peter.addExpense(e1);
             expenseRepository.save(e1);
 
             Expense e2 = new Expense();
-            e2.setAmount(BigDecimal.valueOf(10));
+            e2.setAmount(BigDecimal.valueOf(10).setScale(3, RoundingMode.HALF_UP));
             e2.setDate(LocalDateTime.of(2020, Month.APRIL,13,8,3, 14));
             e2.setDescription("Desayuno en RealFood");
             paco.addExpense(e2);
             expenseRepository.save(e2);
 
             Expense e3 = new Expense();
-            e3.setAmount(BigDecimal.valueOf(10));
+            e3.setAmount(BigDecimal.valueOf(10).setScale(3, RoundingMode.HALF_UP));
             e3.setDate(LocalDateTime.of(2020, Month.APRIL,13,13,17, 0));
             e3.setDescription("Taxi");
             marco.addExpense(e3);

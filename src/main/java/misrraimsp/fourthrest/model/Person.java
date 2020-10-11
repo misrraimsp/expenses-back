@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Person {
     private String lastName;
 
     public BigDecimal getBalance(BigDecimal duty) {
-        return this.getTotalExpense().subtract(duty);
+        return this.getTotalExpense().subtract(duty).setScale(3, RoundingMode.HALF_UP);
     }
 
     public void addExpense(Expense expense) {
@@ -36,7 +37,8 @@ public class Person {
         return this.expenses
                 .stream()
                 .map(Expense::getAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(3, RoundingMode.HALF_UP);
     }
 
 }

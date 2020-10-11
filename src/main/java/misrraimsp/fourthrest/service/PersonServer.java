@@ -1,6 +1,7 @@
 package misrraimsp.fourthrest.service;
 
 import lombok.RequiredArgsConstructor;
+import misrraimsp.fourthrest.data.ExpenseRepository;
 import misrraimsp.fourthrest.data.PersonRepository;
 import misrraimsp.fourthrest.model.Person;
 import misrraimsp.fourthrest.model.dto.PersonConverter;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 public class PersonServer {
 
     private final PersonRepository personRepository;
-    private final ExpenseServer expenseServer;
+    private final ExpenseRepository expenseRepository;
 
     public List<PersonDTO> findAll() {
         BigDecimal duty = this.getDuty();
@@ -75,8 +76,8 @@ public class PersonServer {
     }
 
     private BigDecimal getDuty() {
-        BigDecimal total = BigDecimal.valueOf(expenseServer.getTotalExpense()).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal count = BigDecimal.valueOf(personRepository.count());
-        return total.divide(count, 2, RoundingMode.HALF_UP);
+        BigDecimal total = BigDecimal.valueOf(expenseRepository.getTotalExpense()).setScale(3, RoundingMode.HALF_UP);
+        BigDecimal count = BigDecimal.valueOf(personRepository.count()).setScale(3, RoundingMode.HALF_UP);
+        return total.divide(count, 3, RoundingMode.HALF_UP);
     }
 }

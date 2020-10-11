@@ -15,7 +15,7 @@ public class ExpenseConverter {
         dto.setPayerFirstName(expense.getPayer().getFirstName());
         dto.setPayerLastName(expense.getPayer().getLastName());
         dto.setDescription(expense.getDescription());
-        dto.setAmount(expense.getAmount());
+        dto.setAmount(expense.getAmount().setScale(2, RoundingMode.HALF_UP));
         dto.setDate(expense.getDate().toString());
         return dto;
     }
@@ -26,7 +26,7 @@ public class ExpenseConverter {
         payer.setId(dto.getPayerId());
         expense.setPayer(payer);
         expense.setDescription(dto.getDescription());
-        expense.setAmount(dto.getAmount().setScale(2, RoundingMode.HALF_UP));
+        expense.setAmount(dto.getAmount().setScale(3, RoundingMode.HALF_UP));
         expense.setDate(LocalDateTime.now());
         return expense;
     }
