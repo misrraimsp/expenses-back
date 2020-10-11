@@ -7,6 +7,7 @@ import misrraimsp.fourthrest.model.Expense;
 import misrraimsp.fourthrest.model.Person;
 import misrraimsp.fourthrest.model.dto.ExpenseConverter;
 import misrraimsp.fourthrest.model.dto.ExpenseDTO;
+import misrraimsp.fourthrest.util.EntityNotFoundByIdException;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -30,8 +31,9 @@ public class ExpenseServer {
     }
 
     public ExpenseDTO persist(ExpenseDTO dto) {
-        Person payer = personRepository.findById(dto.getPayerId()).orElseThrow(RuntimeException::new);
         Expense expense = ExpenseConverter.convertDtoToExpense(dto);
+        Person payer = personRepository.findById(dto.getPayerId())
+                .orElseThrow(() -> new EntityNotFoundByIdException(dto.getPayerId(), Person.class.getSimpleName()));
         payer.addExpense(expense);
         return ExpenseConverter.convertExpenseToDto(expenseRepository.save(expense));
     }
