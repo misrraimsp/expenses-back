@@ -51,8 +51,10 @@ public class PersonServer {
             PersonDTO creditor = creditors.peek();
 
             TransferDTO transferDTO = new TransferDTO();
-            transferDTO.setIssuer(debtor);
-            transferDTO.setRecipient(creditor);
+            transferDTO.setIssuerFirstName(debtor.getFirstName());
+            transferDTO.setIssuerLastName(debtor.getLastName());
+            transferDTO.setRecipientFirstName(creditor.getFirstName());
+            transferDTO.setRecipientLastName(creditor.getLastName());
 
             BigDecimal result = debtor.getBalance().add(creditor.getBalance());
             if (result.compareTo(BigDecimal.ZERO) < 0) {

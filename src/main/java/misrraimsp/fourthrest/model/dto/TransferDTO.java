@@ -7,8 +7,10 @@ import java.math.BigDecimal;
 @Data
 public class TransferDTO {
 
-    private PersonDTO issuer;
-    private PersonDTO recipient;
+    private String issuerFirstName;
+    private String issuerLastName;
+    private String recipientFirstName;
+    private String recipientLastName;
     private BigDecimal amount;
 
 }
