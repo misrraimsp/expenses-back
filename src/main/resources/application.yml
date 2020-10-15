@@ -1,7 +1,8 @@
 spring:
   profiles:
     active:
-      dev-mariadb
+      dev-postgresql
+      #dev-mariadb
       #dev-h2
   jpa:
     show-sql: false
@@ -26,5 +27,24 @@ spring:
     schema: classpath:sql/schema.sql
     data: classpath:sql/data.sql
   jpa:
+    hibernate:
+      ddl-auto: none
+
+---
+
+spring:
+  profiles: dev-postgresql
+  datasource:
+    url: jdbc:postgresql://dbpostgresql:5432/autentia
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+    schema: classpath:sql/schema.sql
+    data: classpath:sql/data.sql
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: none
